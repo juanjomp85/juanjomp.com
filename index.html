@@ -26,14 +26,17 @@
     <main class="site-main">
         <section id="hero" class="hero-section">
             <div class="container">
-                <h2 class="hero-title">Bienvenido a moDesign</h2>
-                <p class="hero-subtitle">Tu socio en diseño creativo y soluciones innovadoras</p>
+                <!-- <h2 class="hero-title">Bienvenido a moDesign</h2> -->
+                <!-- <svg id="graphic" width="200" height="200" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="cyan" />
+                </svg> -->
+                <p class="hero-subtitle">Hola, mi nombre es Juan José. Soy desarrollador y diseñador de soluciones digitales. Puedo construir tu web desde cero, o crear una aplicación que se adapte a tus necesidades.</p>
             </div>
         </section>
         <section id="about" class="about-section">
             <div class="container">
-                <h2>Nosotros</h2>
-                <p>En moDesign, nos dedicamos a proporcionar soluciones de diseño únicas que ayudan a nuestros clientes a destacar en un mercado competitivo. Nuestro equipo de expertos combina creatividad y tecnología para ofrecer resultados excepcionales en cada proyecto.</p>
+                <h2>Sobre mí</h2>
+                <p>Mi especialidad es la creación y diseño de páginas web y aplicaciones, con un enfoque en producir soluciones de alta calidad compatibles con múltiples plataformas. Además, poseo experiencia en identidad corporativa y diseño de publicaciones, y he contribuido con contenido para numerosos sitios web.</p>
             </div>
         </section>
         <section id="services" class="services-section">
@@ -122,10 +125,11 @@
         function init() {
             container = document.getElementById('background');
             camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
-            camera.position.set(1000, 1000, 1000); // Position the camera as if the mouse is in the top-right corner
+            camera.position.set(1000, 1000, 1000); // Position the camera 
             camera.lookAt(0, 0, 0);
 
             scene = new THREE.Scene();
+            scene.background = new THREE.Color(0xffffff);
 
             const numParticles = AMOUNTX * AMOUNTY;
             const positions = new Float32Array(numParticles * 3);
@@ -148,7 +152,7 @@
             geometry.setAttribute('scale', new THREE.BufferAttribute(scales, 1));
 
             const material = new THREE.ShaderMaterial({
-                uniforms: { color: { value: new THREE.Color(0xffffff) } },
+                uniforms: { color: { value: new THREE.Color(0xBDBDBD) } },
                 vertexShader: `
                     attribute float scale;
                     void main() {
@@ -172,6 +176,7 @@
             renderer = new THREE.WebGLRenderer();
             renderer.setPixelRatio(window.devicePixelRatio);
             renderer.setSize(window.innerWidth, window.innerHeight);
+            //renderer.setClearColor(0x1a1a1a); //cambiar el color
             container.appendChild(renderer.domElement);
 
             window.addEventListener('resize', onWindowResize, false);
