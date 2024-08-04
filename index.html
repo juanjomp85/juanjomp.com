@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div id="background"></div>
+    <div id="content">
+        <header class="site-header">
+        <div class="container">
+            <h1 class="logo">moDesign</h1>
+            <nav class="site-nav">
+                <ul>
+                    <li><a href="#about">Nosotros</a></li>
+                    <li><a href="#services">Servicios</a></li>
+                    <li><a href="#portfolio">Portafolio</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="site-main">
+        <section id="hero" class="hero-section">
+            <div class="container">
+                <h2 class="hero-title">Bienvenido a moDesign</h2>
+                <p class="hero-subtitle">Tu socio en diseño creativo y soluciones innovadoras</p>
+            </div>
+        </section>
+        <section id="about" class="about-section">
+            <div class="container">
+                <h2>Nosotros</h2>
+                <p>En moDesign, nos dedicamos a proporcionar soluciones de diseño únicas que ayudan a nuestros clientes a destacar en un mercado competitivo. Nuestro equipo de expertos combina creatividad y tecnología para ofrecer resultados excepcionales en cada proyecto.</p>
+            </div>
+        </section>
+        <section id="services" class="services-section">
+            <div class="container">
+                <h2>Servicios</h2>
+                <div class="service">
+                    <h3>Diseño Web</h3>
+                    <p>Desarrollamos sitios web responsivos y atractivos que se adaptan a todas las plataformas y dispositivos, asegurando una experiencia de usuario óptima.</p>
+                </div>
+                <div class="service">
+                    <h3>Branding</h3>
+                    <p>Creación de identidades de marca que comunican la esencia y valores de tu negocio. Desde logotipos hasta guías de estilo completas.</p>
+                </div>
+                <div class="service">
+                    <h3>Marketing Digital</h3>
+                    <p>Soluciones de marketing digital que incluyen SEO, gestión de redes sociales y campañas de publicidad online para aumentar tu visibilidad.</p>
+                </div>
+                <div class="service">
+                    <h3>Diseño Gráfico</h3>
+                    <p>Diseño de material gráfico como folletos, carteles, y presentaciones que capturan la atención y transmiten tu mensaje efectivamente.</p>
+                </div>
+            </div>
+        </section>
+        <section id="portfolio" class="portfolio-section">
+            <div class="container">
+                <h2>Portafolio</h2>
+                <div class="portfolio-item">
+                    <video style="max-width: 1200px; min-width:400px" class="embed-responsive-item" autoplay loop muted>
+                        <source src="img/prototipos_avanzados.mp4" type="video/mp4">
+                        Tu navegador no soporta la etiqueta de video.
+                    </video>
+                    <h3>Proyecto de Diseño Web</h3>
+                    <p>Descripción breve del proyecto 1.</p>
+                </div>
+                <div class="portfolio-item">
+                    <video style="max-width: 1200px; min-width:400px" class="embed-responsive-item" autoplay loop muted>
+                        <source src="img/dice.mp4" type="video/mp4">
+                        Tu navegador no soporta la etiqueta de video.
+                    </video>
+                    <h3>Proyecto de Branding</h3>
+                    <p>Descripción breve del proyecto 2.</p>
+                </div>
+                <div class="portfolio-item">
+                    <img src="img/mercadona.png" alt="Proyecto 3" style="max-width: 1200px; min-width:400px">
+                    <h3>Campaña de Marketing Digital</h3>
+                    <p>Descripción breve del proyecto 3.</p>
+                </div>
+                <!-- Añade más proyectos según sea necesario -->
+            </div>
+        </section>
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2>Contacto</h2>
+                <p>Puedes contactarnos en <a href="mailto:info@modesign.es">info@modesign.es</a> o llamarnos al (123) 456-7890.</p>
+                <form action="contacto.php" method="post">
+                    <label for="name">Nombre:</label>
+                    <input type="text" id="name" name="name" required>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                    <label for="message">Mensaje:</label>
+                    <textarea id="message" name="message" required></textarea>
+                    <button type="submit">Enviar</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2024 moDesign. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    </div>
+
+    <script type="module">
+        import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.min.js';
+
+        let container;
+        let camera, scene, renderer;
+        let particles, count = 0;
+
+        const SEPARATION = 100, AMOUNTX = 200, AMOUNTY = 200;
+
+        init();
+        animate();
+
+        function init() {
+            container = document.getElementById('background');
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
+            camera.position.set(1000, 1000, 1000); // Position the camera as if the mouse is in the top-right corner
+            camera.lookAt(0, 0, 0);
+
+            scene = new THREE.Scene();
+
+            const numParticles = AMOUNTX * AMOUNTY;
+            const positions = new Float32Array(numParticles * 3);
+            const scales = new Float32Array(numParticles);
+
+            let i = 0, j = 0;
+            for (let ix = 0; ix < AMOUNTX; ix++) {
+                for (let iy = 0; iy < AMOUNTY; iy++) {
+                    positions[i] = ix * SEPARATION - ((AMOUNTX * SEPARATION) / 2); // x
+                    positions[i + 1] = 0; // y
+                    positions[i + 2] = iy * SEPARATION - ((AMOUNTY * SEPARATION) / 2); // z
+                    scales[j] = 1;
+                    i += 3;
+                    j++;
+                }
+            }
+
+            const geometry = new THREE.BufferGeometry();
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('scale', new THREE.BufferAttribute(scales, 1));
+
+            const material = new THREE.ShaderMaterial({
+                uniforms: { color: { value: new THREE.Color(0xffffff) } },
+                vertexShader: `
+                    attribute float scale;
+                    void main() {
+                        vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+                        gl_PointSize = scale * (300.0 / -mvPosition.z);
+                        gl_Position = projectionMatrix * mvPosition;
+                    }
+                `,
+                fragmentShader: `
+                    uniform vec3 color;
+                    void main() {
+                        if (length(gl_PointCoord - vec2(0.5, 0.5)) > 0.475) discard;
+                        gl_FragColor = vec4(color, 1.0);
+                    }
+                `,
+            });
+
+            particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+
+            renderer = new THREE.WebGLRenderer();
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            container.appendChild(renderer.domElement);
+
+            window.addEventListener('resize', onWindowResize, false);
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            render();
+        }
+
+        function render() {
+            const positions = particles.geometry.attributes.position.array;
+            const scales = particles.geometry.attributes.scale.array;
+
+            let i = 0, j = 0;
+            for (let ix = 0; ix < AMOUNTX; ix++) {
+                for (let iy = 0; iy < AMOUNTY; iy++) {
+                    positions[i + 1] = (Math.sin((ix + count) * 0.3) * 50) +
+                                       (Math.sin((iy + count) * 0.5) * 50);
+                    scales[j] = (Math.sin((ix + count) * 0.3) + 1) * 20 +
+                                (Math.sin((iy + count) * 0.5) + 1) * 20;
+                    i += 3;
+                    j++;
+                }
+            }
+
+            particles.geometry.attributes.position.needsUpdate = true;
+            particles.geometry.attributes.scale.needsUpdate = true;
+
+            renderer.render(scene, camera);
+
+            count += 0.1;
+        }
+    </script>
+</body>
+</html>
